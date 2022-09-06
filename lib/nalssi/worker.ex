@@ -3,17 +3,6 @@ defmodule Nalssi.Worker do
 
   @absolute_zero -273.15
 
-  def loop do
-    receive do
-      {sender_pid, location} ->
-        send(sender_pid, {:ok, temperature_of(location)})
-
-      _ ->
-        IO.puts("what is this?")
-    end
-    loop
-  end
-
   def temperature_of(location) do
     result = url_for(location) |> HTTPoison.get() |> parse_response
 
@@ -48,11 +37,3 @@ defmodule Nalssi.Worker do
     end
   end
 end
-
-
-# cities = ["Singapore", "Monaco", "Vatican City", "Hong Kong", "Macau"]
-
-cities |> Enum.each(fn city ->
-  pid = spawn(Nalssi.Worker, :loop, [])
-  send(pid, {self, city})
-end)
