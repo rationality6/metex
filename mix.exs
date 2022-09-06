@@ -22,7 +22,8 @@ defmodule Metex.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.8.2"},
-      {:json,      "~> 1.4.1"}
+      {:json,      "~> 1.4.1"},
+      {:mix_test_watch, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
   end
 end
