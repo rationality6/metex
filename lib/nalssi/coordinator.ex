@@ -17,4 +17,5 @@ defmodule Nalssi.Coordinator do
         async_loop(results, results_expected)
     end
   end
+
 end

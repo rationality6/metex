@@ -8,8 +8,18 @@ defmodule Nalssi do
       send(worker_pid, {coordinator_pid, city})
     end)
   end
-end
 
+  def temperatures_of_sync(cities) do
+    results =
+      cities
+      |> Enum.each(fn city ->
+        worker_pid = spawn(Nalssi.Worker, :loop, [])
+        send(worker_pid, {self(), city})
+      end)
+
+    IO.puts(results |> Enum.sort() |> Enum.join(", "))
+  end
+end
 
 # cities = [
 #   "Seoul",

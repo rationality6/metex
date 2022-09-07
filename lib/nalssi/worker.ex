@@ -27,7 +27,7 @@ defmodule Nalssi.Worker do
     end
   end
 
-  defp url_for(location) do
+  def url_for(location) do
     location = URI.encode(location)
     "http://api.openweathermap.org/data/2.5/weather?q=#{location}&appid=#{@api_key}"
   end
